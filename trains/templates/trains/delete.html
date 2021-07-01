@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% block title %} Удаление города {% endblock %}
+
+{% block content %}
+    <h1>Удаление города</h1>
+    <p>{{ object }}</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form action="{{action}}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-danger">УдОли</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

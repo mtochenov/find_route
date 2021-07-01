@@ -7,11 +7,11 @@ class City(models.Model):
     name = models.CharField(max_length=128, unique=True, verbose_name="Город",)
 
     def __str__(self):
-        """ В таблицах меняет обозначение объекта с city.object(id) на имя собственное объекта"""
+        """В таблицах меняет обозначение объекта с city.object(id) на имя собственное объекта"""
         return self.name
 
     class Meta:
-        """Задает название ед. и множ. числа элементов в таблице"""
+        """Задает название ед. и множ. числа элементов в таблице и принцип сортировки"""
         verbose_name = "Город"
         verbose_name_plural = "Города"
         ordering = ["name"]  # Сортировка объектов таблицы по имени

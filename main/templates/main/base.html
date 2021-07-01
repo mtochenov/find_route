@@ -1,4 +1,5 @@
 {% url 'cities' as cities_url %}
+{% url 'trains' as trains_url %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,7 +26,8 @@
                  aria-current="page" href="{% url 'cities' %}">Города</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link {% if request.path == trains_url %}active{% endif %}"
+                 aria-current="page" href="{% url 'trains' %}">Поезда</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Pricing</a>

@@ -1,20 +1,33 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Города {% endblock %}
+{% block title %} Поезда {% endblock %}
 
 {% block content %}
-    <h3>This is cities page</h3>
-    {# Отображение списка городов #}
+    <h3>This is trains page</h3>
+    {# Отображение списка поездов #}
     <div class="row">
         <div class="col-md-8 mx-auto">
             <table class="table table-striped">
+                <tr>
+                    <th>Номер</th>
+                    <th>Откуда</th>
+                    <th>Куда</th>
+                    <th>Время в пути</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
                 {% for object in page_obj %}
                     <tr>
-                        <td><a href="{% url 'cities_detail' pk=object.id %}">{{object.name}}</a></td>
-                        <td><a href="{% url 'cities_update' pk=object.id %}">
-                            <button type="submit" class="btn btn-info">Редактировать</button></a></td>
-                        <td><a href="{% url 'cities_delete' pk=object.id %}">
-                            <button type="submit" class="btn btn-danger">Удалить</button></a></td>
+                        <td><a href="{% url 'trains_detail' pk=object.id %}">{{object.name}}</a></td>
+                        <td>{{object.departure_city}}</td>
+                        <td>{{object.destination_city}}</td>
+                        <td>{{object.travel_time}}</td>
+                        <td><a href="{% url 'trains_update' pk=object.id %}">
+                            <button type="submit" class="btn btn-info">Редактировать</button></a>
+                        </td>
+                        <td><a href="{% url 'trains_delete' pk=object.id %}">
+                            <button type="submit" class="btn btn-danger">Удалить</button></a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -44,14 +57,4 @@
             </li>
         </ul>
     </nav>
-    {# Добавление города #}
-    <div class="row">
-        <div class="col-md-4">
-            <form action="{% url 'cities_create' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Добавить город">
-        </form>
-        </div>
-    </div>
 {% endblock %}

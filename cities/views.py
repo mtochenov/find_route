@@ -68,7 +68,7 @@ class CityDeleteView(DeleteView):
     success_url = reverse_lazy("cities")
 
     # def get(self, request, *args, **kwargs):
-    #     messages.success(request, "Город успешно удолен")  # Удаление объекта без перехода на
+    #     messages.success(request, "Город успешно удален")  # Удаление объекта без перехода на
     #     return self.post(request, *args, **kwargs)  # соответствующую страницу html и подтверждения
 
 
