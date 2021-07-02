@@ -4,22 +4,18 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (DetailView, CreateView, UpdateView, DeleteView, ListView)
-from .forms import TrainForm
-from .models import Train
+from trains.forms import TrainForm
+from trains.models import Train
 
 __all__ = (
     "trains", "TrainDetailView", "TrainCreateView", "TrainUpdateView", "TrainDeleteView", "TrainListView",
 )
 
 
-def trains(request, page_number=None):
-    # if request.method == "POST":
-    #     form = TrainForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-
+def trains(request, page_number=None, pk=None):
     qs = Train.objects.all()
     list = Paginator(qs, 4)
+    page_number = request.GET.get('page')  # Was added
     page_obj = list.get_page(page_number)
     data = {
         "title": "Список Поездов",
@@ -58,7 +54,7 @@ class TrainUpdateView(SuccessMessageMixin, UpdateView):
 
 class TrainDeleteView(DeleteView):
     model = Train
-    template_name = "trains/delete.html"
+    # template_name = "trains/delete.html"  # comment was added
     success_url = reverse_lazy("trains:trains")
 
     def get(self, request, *args, **kwargs):

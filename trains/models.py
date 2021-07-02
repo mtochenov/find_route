@@ -1,7 +1,5 @@
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.http import request
-from django.urls import reverse
 from cities.models import City
 
 
@@ -43,3 +41,13 @@ class Train(models.Model):
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+
+
+class TrainTest(models.Model):  # class was added
+    name = models.CharField(max_length=50, unique=True,
+                            verbose_name='Номер поезда')
+    from_city = models.ForeignKey(City, on_delete=models.CASCADE,
+                                  # null=True, blank=True,
+                                  related_name='from_city',
+                                  verbose_name='Из какого города'
+                                  )

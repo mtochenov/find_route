@@ -1,5 +1,5 @@
 from django import forms
-from .models import Train
+from trains.models import Train
 from cities.models import City
 
 
@@ -28,8 +28,8 @@ class TrainForm(forms.ModelForm):
                                                   "class": "form-control",
                                               }))
 
-    def __init__(self, *args, **kwargs):
-        super(TrainForm, self).__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):  # comment on function was added
+    #     super(TrainForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Train
