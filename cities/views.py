@@ -7,9 +7,9 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView,
 from .forms import HtmlForm, CityForm
 from .models import City
 
-# __all__ = (
-#     "cities", "CityDetailView"
-# )
+__all__ = (
+    "cities", "CityDetailView", "CityCreateView", "CityUpdateView", "CityDeleteView", "CityListView",
+)
 
 
 def cities(request, pk=None, page_number=None):
@@ -43,14 +43,14 @@ def cities(request, pk=None, page_number=None):
 
 class CityDetailView(DetailView):
     queryset = City.objects.all()
-    template_name = "cities/details.html"
+    template_name = "cities/detail.html"
 
 
 class CityCreateView(SuccessMessageMixin, CreateView):
     model = City
     form_class = CityForm
     template_name = "cities/create.html"
-    success_url = reverse_lazy("cities")  # Заменяет def get_absolute_url в models.py
+    success_url = reverse_lazy("cities:cities")  # Заменяет def get_absolute_url в models.py
     success_message = "Город успешно добавлен"
 
 
@@ -58,14 +58,14 @@ class CityUpdateView(SuccessMessageMixin, UpdateView):
     model = City
     form_class = CityForm
     template_name = "cities/update.html"
-    success_url = reverse_lazy("cities")
+    success_url = reverse_lazy("cities:cities")
     success_message = "Город успешно отредактирован"
 
 
 class CityDeleteView(DeleteView):
     model = City
     template_name = "cities/delete.html"
-    success_url = reverse_lazy("cities")
+    success_url = reverse_lazy("cities:cities")
 
     # def get(self, request, *args, **kwargs):
     #     messages.success(request, "Город успешно удален")  # Удаление объекта без перехода на

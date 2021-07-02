@@ -1,5 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.http import request
+from django.urls import reverse
 from cities.models import City
 
 

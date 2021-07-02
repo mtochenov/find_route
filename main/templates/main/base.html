@@ -1,5 +1,5 @@
-{% url 'cities' as cities_url %}
-{% url 'trains' as trains_url %}
+{% url 'cities:cities' as cities_url %}
+{% url 'trains:trains' as trains_url %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,11 +23,11 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link {% if request.path == cities_url %}active{% endif %}"
-                 aria-current="page" href="{% url 'cities' %}">Города</a>
+                 aria-current="page" href="{% url 'cities:cities' %}">Города</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if request.path == trains_url %}active{% endif %}"
-                 aria-current="page" href="{% url 'trains' %}">Поезда</a>
+                 aria-current="page" href="{% url 'trains:trains' %}">Поезда</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Pricing</a>

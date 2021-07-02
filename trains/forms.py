@@ -13,7 +13,7 @@ class TrainForm(forms.ModelForm):
     travel_time = forms.ImageField(label="Время в пути",
                                    widget=forms.NumberInput(attrs={
                                        "class": "form-control",
-                                       "placeholder": "Введите название поезда"
+                                       "placeholder": "Укажите время в пути"
                                    }))
 
     departure_city = forms.ModelChoiceField(label="Город отправления",
@@ -27,6 +27,9 @@ class TrainForm(forms.ModelForm):
                                               widget=forms.Select(attrs={
                                                   "class": "form-control",
                                               }))
+
+    def __init__(self, *args, **kwargs):
+        super(TrainForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Train
