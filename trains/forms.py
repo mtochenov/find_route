@@ -10,11 +10,11 @@ class TrainForm(forms.ModelForm):
                                "placeholder": "Введите название поезда"
                            }))
 
-    travel_time = forms.ImageField(label="Время в пути",
-                                   widget=forms.NumberInput(attrs={
-                                       "class": "form-control",
-                                       "placeholder": "Укажите время в пути"
-                                   }))
+    travel_time = forms.IntegerField(label="Время в пути",
+                                     widget=forms.NumberInput(attrs={
+                                           "class": "form-control",
+                                           "placeholder": "Укажите время в пути"
+                                     }))  # forms.ImageField - неверный формат ввода данных
 
     departure_city = forms.ModelChoiceField(label="Город отправления",
                                             queryset=City.objects.all(),

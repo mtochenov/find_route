@@ -8,21 +8,26 @@ from trains.forms import TrainForm
 from trains.models import Train
 
 __all__ = (
-    "trains", "TrainDetailView", "TrainCreateView", "TrainUpdateView", "TrainDeleteView", "TrainListView",
+    # "trains",
+    "TrainDetailView",
+    "TrainCreateView",
+    "TrainUpdateView",
+    "TrainDeleteView",
+    "TrainListView",
 )
 
 
-def trains(request, page_number=None, pk=None):
-    qs = Train.objects.all()
-    list = Paginator(qs, 4)
-    page_number = request.GET.get('page')  # Was added
-    page_obj = list.get_page(page_number)
-    data = {
-        "title": "Список Поездов",
-        "page_obj": page_obj,
-            }
-
-    return render(request, "trains/trains.html", data)
+# def trains(request, page_number=None, pk=None):
+#     qs = Train.objects.all()
+#     list = Paginator(qs, 4)
+#     page_number = request.GET.get('page')  # Was added
+#     page_obj = list.get_page(page_number)
+#     data = {
+#         "title": "Список Поездов",
+#         "page_obj": page_obj,
+#             }
+#
+#     return render(request, "trains/trains.html", data)
 
 
 class TrainListView(ListView):
@@ -54,7 +59,7 @@ class TrainUpdateView(SuccessMessageMixin, UpdateView):
 
 class TrainDeleteView(DeleteView):
     model = Train
-    # template_name = "trains/delete.html"  # comment was added
+    template_name = "trains/delete.html"  # comment was added
     success_url = reverse_lazy("trains:trains")
 
     def get(self, request, *args, **kwargs):

@@ -5,7 +5,7 @@ from cities.models import City
 
 class Train(models.Model):
     """Задаеем поля в таблице: имя, время_в_пути, город_отправления и город_назначения"""
-    name = models.CharField(max_length=55, unique=True, verbose_name="Номер поезда")
+    name = models.CharField(max_length=50, unique=True, verbose_name="Номер поезда")
     travel_time = models.PositiveSmallIntegerField(verbose_name="Время в пути")
 
     departure_city = models.ForeignKey(City, on_delete=models.CASCADE,  # CASCADE - Приудалении данных в одной таблице удаляются и связанные данные в др. таблицах
@@ -43,11 +43,11 @@ class Train(models.Model):
         super().save(*args, **kwargs)
 
 
-class TrainTest(models.Model):  # class was added
-    name = models.CharField(max_length=50, unique=True,
-                            verbose_name='Номер поезда')
-    from_city = models.ForeignKey(City, on_delete=models.CASCADE,
-                                  # null=True, blank=True,
-                                  related_name='from_city',
-                                  verbose_name='Из какого города'
-                                  )
+# class TrainTest(models.Model):  # class was added
+#     name = models.CharField(max_length=50, unique=True,
+#                             verbose_name='Номер поезда')
+#     from_city = models.ForeignKey(City, on_delete=models.CASCADE,
+#                                   # null=True, blank=True,
+#                                   related_name='from_city',
+#                                   verbose_name='Из какого города'
+#                                   )
