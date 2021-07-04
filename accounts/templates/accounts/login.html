@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+{% block title %} Форма входа {% endblock %}
+
+{% block content %}
+    <h3>Форма входа</h3>
+
+    {% include "main/form.html" with button="Войти" %}
+
+{% endblock %}

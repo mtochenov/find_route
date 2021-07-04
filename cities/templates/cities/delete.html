@@ -2,16 +2,23 @@
 {% block title %} Удаление города {% endblock %}
 
 {% block content %}
-    <h1>Удаление города</h1>
+    <h3>Удаление города</h3>
     <p>{{ object }}</p>
 
     <div class="row">
         <div class="col-md-4">
-            <form action="{{action}}" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-danger">Да, удалить</button>
-            </form>
+            <tr>
+                <td><form action="{{action}}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-outline-danger">Да, удалить</button>
+                    </form></td><br>
+                <td>
+                    <a href="{% url 'cities:cities' %}">
+                        <button type="button" class="btn btn-outline-primary">Нет, не удалять</button>
+                    </a>
+                </td>
+            </tr>
         </div>
     </div>
 

@@ -12,4 +12,4 @@ urlpatterns = [
     path('<int:pk>/update/', TrainUpdateView.as_view(), name="update"),
     path('<int:pk>/delete/', TrainDeleteView.as_view(), name="delete"),
     # path('', views.trains, name="trains"),
-                ]
+]

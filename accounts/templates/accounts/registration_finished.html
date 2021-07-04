@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% block title %} Регистрация завершена {% endblock %}
+
+{% block content %}
+    <h3>Регистрация пользователя {{ new_user.username }} успешно завершена</h3>
+
+    <p>Теперь Вы можете войти и воспользоваться полным функционалом сайта</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'accounts:login' %}">
+                <button type="button" class="btn btn-outline-primary">Войти</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

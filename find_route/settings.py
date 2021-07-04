@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'main',
     'cities',
     'trains',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

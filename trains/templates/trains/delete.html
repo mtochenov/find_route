@@ -2,7 +2,7 @@
 {% block title %} Удаление города {% endblock %}
 
 {% block content %}
-    <h1>Удаление города</h1>
+    <h3>Удаление города</h3>
     <p>{{ object }}</p>
 
     <div class="row">
@@ -10,7 +10,7 @@
             <form action="{{action}}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-danger">УдОли</button>
+                <button type="submit" class="btn btn-outline-danger">Да, удалить</button>
             </form>
         </div>
     </div>

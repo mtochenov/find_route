@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+{% block title %} Регистрация {% endblock %}
+
+{% block content %}
+    <h3>Регистрация нового пользователя</h3>
+
+    {% include "main/form.html" with button="Зарегистрироваться" %}
+
+{% endblock %}
