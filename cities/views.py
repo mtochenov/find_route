@@ -5,8 +5,12 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
+from rest_framework import permissions, authentication
+
 from .forms import HtmlForm, CityForm
 from .models import City
+
+# from accounts.permissions import IsAuthenticated, AllowAny
 
 __all__ = (
     "cities", "CityDetailView", "CityCreateView", "CityUpdateView", "CityDeleteView", "CityListView",
@@ -45,9 +49,11 @@ def cities(request, pk=None, page_number=None):
 class CityDetailView(DetailView):
     queryset = City.objects.all()
     template_name = "cities/detail.html"
+    authentication_classes = [authentication.TokenAuthentication]  # TODO Доработать
+    permission_classes = [permissions.IsAdminUser]  # TODO Доработать
 
 
-class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):  # IsAuthenticated
     model = City
     form_class = CityForm
     template_name = "cities/create.html"
@@ -61,12 +67,16 @@ class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     template_name = "cities/update.html"
     success_url = reverse_lazy("cities:cities")
     success_message = "Город успешно отредактирован"
+    authentication_classes = [authentication.TokenAuthentication]  # TODO Доработать
+    permission_classes = [permissions.IsAdminUser]  # TODO Доработать
 
 
 class CityDeleteView(LoginRequiredMixin, DeleteView):
     model = City
     template_name = "cities/delete.html"
     success_url = reverse_lazy("cities:cities")
+    authentication_classes = [authentication.TokenAuthentication]  # TODO Доработать
+    permission_classes = [permissions.IsAdminUser]  # TODO Доработать
 
     # def get(self, request, *args, **kwargs):
     #     messages.success(request, "Город успешно удален")  # Удаление объекта без перехода на

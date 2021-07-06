@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 from .forms import UserLoginForm, UserRegistrationForm
+from .permissions import IsAuthenticated, AllowAny
 
 
 def login_view(request):
