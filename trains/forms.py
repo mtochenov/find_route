@@ -28,9 +28,6 @@ class TrainForm(forms.ModelForm):
                                                   "class": "form-control",
                                               }))
 
-    # def __init__(self, *args, **kwargs):  # comment on function was added
-    #     super(TrainForm, self).__init__(*args, **kwargs)
-
     class Meta:
         model = Train
         fields = "__all__"  # "name", "travel_time", "departure_city", "destination_city"
