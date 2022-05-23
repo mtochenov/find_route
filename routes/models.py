@@ -7,16 +7,16 @@ class Route(models.Model):
     """Задаем поля в таблице: имя, время_в_пути, город_отправления и город_назначения"""
     name = models.CharField(max_length=50, unique=True, verbose_name="Название маршрута")
     travel_time_common = models.PositiveSmallIntegerField(verbose_name="Общее время в пути")
-
-    departure_city = models.ForeignKey(City, on_delete=models.CASCADE,
-                                       related_name="route_departure_city_set",
-                                       verbose_name="Город отправления"
-                                       )
-    destination_city = models.ForeignKey("cities.City", on_delete=models.CASCADE,
-                                         related_name="route_destination_city_set",
-                                         verbose_name="Город назначения"
-                                         )
-
+    departure_city = models.ForeignKey(
+        City, on_delete=models.CASCADE,
+        related_name="route_departure_city_set",
+        verbose_name="Город отправления"
+    )
+    destination_city = models.ForeignKey(
+        "cities.City", on_delete=models.CASCADE,
+        related_name="route_destination_city_set",
+        verbose_name="Город назначения"
+    )
     trains = models.ManyToManyField(Train, verbose_name="Список поездов")
 
     def __str__(self):

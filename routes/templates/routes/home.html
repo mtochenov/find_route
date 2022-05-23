@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% block title %} Поиск маршрута {% endblock %}
+
+{% block content %}
+    <h3>Поиск маршрута</h3>
+    {% url 'find_routes' as action %}
+    {% include "main/form.html" with button="Найти" action=action%}
+    <br>
+    <div class="col-md-8 mx-auto">
+        {% if routes %}
+            <h3>Маршрут из города {{ cities.departure_city }} в город {{ cities.destination_city }}</h3>
+            {% for route in routes %}
+                <p>Время в пути {{ route.total_time }}</p>
+                <p>Список пездов по маршруту:</p>
+                {% for train in  route.trains%}
+                    <p>{{ train }}</p>
+                {% endfor %}
+                <br>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}

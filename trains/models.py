@@ -24,7 +24,7 @@ class Train(models.Model):
     class Meta:
         verbose_name = "Поезд"
         verbose_name_plural = "Поезда"
-        ordering = ["name"]
+        ordering = ["travel_time"]
 
     def clean(self):
         """В данной функции мы проверяем уникальность новой записи и поднимаем ошибку в случае, если запись не уникальна"""
