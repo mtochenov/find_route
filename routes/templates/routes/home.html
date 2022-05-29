@@ -2,22 +2,46 @@
 {% block title %} Поиск маршрута {% endblock %}
 
 {% block content %}
-    <h3>Поиск маршрута</h3>
-    {% url 'find_routes' as action %}
-    {% include "main/form.html" with button="Найти" action=action%}
-    <br>
-    <div class="col-md-8 mx-auto">
-        {% if routes %}
-            <h3>Маршрут из города {{ cities.departure_city }} в город {{ cities.destination_city }}</h3>
-            {% for route in routes %}
-                <p>Время в пути {{ route.total_time }}</p>
-                <p>Список пездов по маршруту:</p>
-                {% for train in  route.trains%}
-                    <p>{{ train }}</p>
-                {% endfor %}
-                <br>
-            {% endfor %}
-        {% endif %}
-    </div>
-
+<h3>Поиск маршрута</h3>
+{% url 'find_routes' as action %}
+{% include "main/form.html" with button="Найти" action=action%}
+<br>
+<div class="col-md-8 mx-auto">
+    {% if routes %}
+        <h3>Маршрут{% if routes|length != 1 %}ы {% endif %}
+            из города {{ cities.departure_city.name }} в город {{ cities.destination_city.name }}</h3>
+        <br>
+        {% for route in routes %}
+            <form action="{% url 'add_route' %}" method="post"> {% csrf_token %}
+            <input type="hidden" name="departure_city" value="{{ cities.departure_city.id }}">
+            <input type="hidden" name="destination_city" value="{{ cities.destination_city.id }}">
+            <input type="hidden" name="total_time" value="{{ route.total_time }}">
+            <input type="hidden" name="trains"
+                 value="{% for train in route.trains %}{{ train.id }},{% endfor %}">
+            {% if forloop.first %}<h5 style="color: red;">Самый быстрый маршрут</h5>{% endif %}
+            <h5>Время в пути {{ route.total_time }} час(ов)</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Список поездов по маршруту</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for train in route.trains%}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>Поезд {{ train.name }} из города {{ train.departure_city  }} в город {{ train.destination_city }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if user.is_authenticated %}
+                    <button title="submit" class="btn btn-success">Сохранить</button>
+                {% endif %}
+            </form>
+            <br>
+        {% endfor %}
+    {% endif %}
+</div>
 {% endblock %}

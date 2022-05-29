@@ -17,39 +17,43 @@
                        aria-current="page" href="{% url 'trains:trains' %}">Поезда</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Заглушка</a>
+                    <a class="nav-link" href="{% url 'list_routes' %}">Маршруты</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle
-                                  {% if request.path == cities_create_url or request.path == trains_create_url %}
-                                    active
-                                  {% endif %}
-                                 " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                      Добавить
-                    </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <li><a class="dropdown-item" href="{% url 'cities:create' %}">Новый город</a></li>
-                      <li><a class="dropdown-item" href="{% url 'trains:create' %}">Новый поезд</a></li>
-                  </ul>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle
+                                      {% if request.path == cities_create_url or request.path == trains_create_url %}
+                                        active
+                                      {% endif %}
+                                     " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                          Добавить
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="{% url 'cities:create' %}">Новый город</a></li>
+                          <li><a class="dropdown-item" href="{% url 'trains:create' %}">Новый поезд</a></li>
+                          <li><a class="dropdown-item" href="{% url 'home' %}">Новый маршрут</a></li>
+                        </ul>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Добавить</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Добавить</a></li>
                 {% endif %}
                 {# Авторизация/ выход пользователя #}
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" style="color: black;" href="#">Вы вошли как: {{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:registration' %}">Зарегистрироваться</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:registration' %}">Зарегистрироваться</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

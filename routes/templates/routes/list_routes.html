@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Маршруты {% endblock %}
+
+{% block content %}
+    <h3 align="center">Список маршрутов</h3>
+    {# Отображение списка поездов #}
+    <div class="row">
+        <div class="col-md-8 mx-auto my-3">
+            <table class="table table-striped">
+                <tr>
+                    <th>Название</th>
+                    <th>Откуда</th>
+                    <th>Куда</th>
+                    <th>Время в пути</th>
+                </tr>
+                {% for object in page_obj %}
+                    <tr>
+                        <td><a href="{% url 'detail_route' pk=object.id %}" style="text-decoration:none">{{object.name}}</a></td>
+                        <td>{{object.departure_city}}</td>
+                        <td>{{object.destination_city}}</td>
+                        <td>{{object.travel_time_common}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {# Пагинация #}
+    {% include 'main/pagination.html' %}
+{% endblock %}
